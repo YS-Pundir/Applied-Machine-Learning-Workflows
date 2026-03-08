@@ -31,3 +31,40 @@ from students;
 select name
 from  students
 where score>80;
+
+select name 
+from students 
+where score >80 and passed=True;
+
+select name 
+from students 
+where score >85 or class=9;
+
+select name
+from students 
+where not passed =True;
+
+select distinct class
+from students;
+
+select name 
+from students 
+order by score DESC 
+limit 5;
+
+select name
+from students 
+order by class;
+
+select name
+from students 
+order by score desc;
+
+select score as "Final Score"
+from students ;
+
+select name   ,score 
+from students
+where score >75
+order by score desc 
+limit 3;
