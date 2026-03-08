@@ -24,3 +24,6 @@ values
 
 SELECT *
 from students;
+
+select name,score
+from students;
