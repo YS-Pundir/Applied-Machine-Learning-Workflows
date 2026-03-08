@@ -21,3 +21,6 @@ values
 (8,"Sneha",73,TRUE,9),
 (9,"Arjun",84,TRUE,10),
 (10,"Kavya",69,FALSE,9);
+
+SELECT *
+from students;
