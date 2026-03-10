@@ -15,3 +15,29 @@ create table activity(
 user_id	Int,
 login_count	Int
 );
+
+insert into users 
+(user_id ,name,signup_date )
+values
+(1,"Aarav",2023-01-10),
+(2,"Diya",2023-02-14),
+(3,"Rohan",2023-03-01),
+(4,"Meera",2023-04-11),
+(5,"Kabir",2023-05-06);
+
+insert into orders 
+(order_id,user_id,amount)
+values
+(101,1,500),
+(102,1,700),
+(103,2,300),
+(104,4,900),
+(105,4,400);
+
+insert into activity
+(user_id,login_count)
+values
+(1,25),
+(2,10),
+(3,5),
+(5,12);
