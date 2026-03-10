@@ -1,0 +1,17 @@
+use DBeaver;
+create table users(
+user_id	Int Primary Key,
+name	varchar(50),
+signup_date	Date
+);
+
+create table orders(
+order_id	Int Primary Key,
+user_id	Int ,
+amount	Int 
+);
+
+create table activity(
+user_id	Int,
+login_count	Int
+);
