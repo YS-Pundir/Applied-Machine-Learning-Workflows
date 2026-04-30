@@ -11,6 +11,9 @@ from sklearn.pipeline import make_pipeline
 # importing the evaluation tools
 from sklearn.metrics import (accuracy_score,classification_report,confusion_matrix,roc_auc_score)
 from sklearn.metrics import precision_recall_curve
+from sklearn.metrics import precision_score,recall_score,f1_score
+# additional tool
+from IPython.display import display
 
 
 # --- Step 1: Generate the Dataset ---
@@ -144,3 +147,24 @@ print("The Best Threshold : ",best_threshold)
 print("The best precisions : ",precisions[best_idx])
 print("The best recalls : ",recalls[best_idx])
 print("The best f1 score : ",f1_scores[best_idx])
+print("_"*100)
+# Step 5 
+prec_defoult=precision_score(y_pred_defoult,y_test)
+recall_defoult=recall_score(y_pred_defoult,y_test)
+f1_defoult=f1_score(y_test,y_pred_defoult)
+
+prec_custom=precision_score(y_pred_costume,y_test)
+recall_custom=recall_score(y_pred_costume,y_test)
+f1_custom=f1_score(y_test,y_pred_costume)
+
+comparision={
+    "Metrics":["Precision","recall score","F1 Score"],
+    "Defoult":[prec_defoult,recall_defoult,f1_defoult],
+    "Costumed":[prec_custom,recall_custom,f1_custom]
+
+}
+comp=pd.DataFrame(comparision)
+print("The Comparision table of metrics with diffrent thresholds : ")
+print()
+display(comp)
+
