@@ -10,7 +10,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import make_pipeline
 # importing the evaluation tools
 from sklearn.metrics import (accuracy_score,classification_report,confusion_matrix,roc_auc_score)
-
+from sklearn.metrics import precision_recall_curve
 
 
 # --- Step 1: Generate the Dataset ---
@@ -98,13 +98,13 @@ print("-------- Random Forest evaluation --------")
 
 print()
 print()
-prediction=pipe2.predict(X_test)
+prediction_rf=pipe2.predict(X_test)
 print("------------- Accuracy Scores -------------")
 print("The training Score : ",pipe2.score(X_train,y_train)*100,"%")
 print("The testing score : ",pipe2.score(X_test,y_test)*100,"%")
 print()
 print("------------- Confusion matrix -------------")
-matrix=confusion_matrix(prediction,y_test)
+matrix=confusion_matrix(prediction_rf,y_test)
 print(matrix)
 tn=matrix[0][0]
 fp=matrix[0][1]
@@ -114,13 +114,33 @@ print()
 print(f"tn : {fn} | fp : {tp}\nfn : {tn}  | tp : {fp}")
 print()
 print("---------- Classification report ----------")
-print(classification_report(prediction,y_test))
+print(classification_report(prediction_rf,y_test))
 print()
 print("----------------- ROC-AUC -----------------")
 # Get probabilities for the positive class
-probab = pipe2.predict_proba(X_test)[:, 1]
+probab_rf = pipe2.predict_proba(X_test)[:, 1]
 
 # Correct order: (y_true, y_score)
-roc_score = roc_auc_score(y_test, probab)
+roc_score = roc_auc_score(y_test, probab_rf)
 
 print(f"ROC AUC Score: {roc_score:.4f}")
+
+print("_"*100)
+precisions,recalls,thresholds=precision_recall_curve(y_test,probab_rf)
+
+# claculating the f1 score for all the thresholds and the one with the highest thresholds will be the best threshold
+# adding the 1e-9 prevents it dividing by 0
+f1_scores=(
+    (2*precisions[:-1]*recalls[:-1])/
+    (precisions[:-1]+recalls[:-1]+1e-9)
+)
+
+best_idx=f1_scores.argmax()
+best_threshold=thresholds[best_idx]
+y_pred_defoult=(probab_rf>=0.5).astype(int)
+y_pred_costume=(probab_rf>=best_threshold).astype(int)
+
+print("The Best Threshold : ",best_threshold)
+print("The best precisions : ",precisions[best_idx])
+print("The best recalls : ",recalls[best_idx])
+print("The best f1 score : ",f1_scores[best_idx])
