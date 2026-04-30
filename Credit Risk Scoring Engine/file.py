@@ -80,7 +80,7 @@ fp=matrix[0][1]
 fn=matrix[1][0]
 tp=matrix[1][1]
 print()
-print(f"tn : {fn} | fp : {tp}\nfn : {tn}  | tp : {fp}")
+print(f"tn : {tn} | fp : {fp}\nfn : {fn}  | tp : {tp}")
 print("---------- Classification report ----------")
 print(classification_report(prediction,y_test))
 print()
@@ -114,7 +114,7 @@ fp=matrix[0][1]
 fn=matrix[1][0]
 tp=matrix[1][1]
 print()
-print(f"tn : {fn} | fp : {tp}\nfn : {tn}  | tp : {fp}")
+print(f"tn : {tn} | fp : {fp}\nfn : {fn}  | tp : {tp}")
 print()
 print("---------- Classification report ----------")
 print(classification_report(prediction_rf,y_test))
